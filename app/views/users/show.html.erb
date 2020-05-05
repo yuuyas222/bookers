@@ -1,0 +1,9 @@
+<h1>User info</h1>
+
+<div class = "plofile-container">
+    <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+    <h3>name  <%= @user.username %></h3>
+    <h3>introduction  <%= @user.introduction %></h3>
+</div>
+
+<%= render "books/new", book: @content %>

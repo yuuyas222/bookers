@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  
+
+  <div class = "container">
+  <nav class="navbar navbar-default navbar-static-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<span>
+				Bookers
+			</span>
+		</div>
+		
+		<div class= "navbar-right" >
+			<ul class="nav navbar-nav">
+      <li><a class="glyphicon glyphicon-home" aria-hidden="true" href="#">home</a></li>
+			<li><a class="glyphicon glyphicon-user" aria-hidden="true" href="#">user</a></li>
+      <li><a class="glyphicon glyphicon-book" aria-hidden="true" href="#">books</a></li>
+      <li><%= link_to "logout", destroy_user_session_path, method: :delete %>
+        </li>
+			</ul>
+			
+		</div>
+	</div>
+  </nav>
+  </div>
+
+  
+
+    <%= yield %>
+  </body>
+</html>
