@@ -1,6 +1,3 @@
-<section class = "book">
-<h1>Books</h1>
-
 <div class = "plofile-container">
     <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
     <h3>name  <%= @user.name %></h3>
@@ -18,13 +15,9 @@
 <% end %>
 </section>
 
-
-<% @books.each do |book| %>
+<div class = "user-index">
+<% @users.each do |user| %>
     <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
-    <%= book.title %>
-    <%= book.body %>
+    <%= user.name %>
 <% end %>
-
-
-
-</section>
+</div>

@@ -2,8 +2,23 @@
 
 <div class = "plofile-container">
     <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
-    <h3>name  <%= @user.username %></h3>
+    <h3>name  <%= @user.name %></h3>
     <h3>introduction  <%= @user.introduction %></h3>
 </div>
 
-<%= render "books/new", book: @content %>
+<section class = "single-book">
+<%= form_for (@book) do |f| %>
+   <h2>Title</h2>
+   <%= f.text_field :title %>
+   <h2>Opinion</h2>
+   <%= f.text_area :body %> 
+
+   <%= f.submit '投稿' %>
+<% end %>
+</section>
+
+<% @books.each do |book| %>
+    <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+    <%= book.title %>
+    <%= book.body %>
+<% end %>
