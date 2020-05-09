@@ -1,30 +1,63 @@
-<section class = "book">
-<h1>Books</h1>
+  <% if @book.errors.any? %>
+    <div class = "error">
+    <h2><%= @book.errors.count %>errors prohibited this obj from being saved:</h2>
+    <ul>
+    <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+    <% end %>
+    </ul>
+    </div>
+  <% end %>
 
-<div class = "plofile-container">
-    <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
-    <h3>name  <%= @user.name %></h3>
-    <h3>introduction  <%= @user.introduction %></h3>
-</div>
+  <div class = "container">
+  <div class = "body-container">
+     <div class = "col-xs-3">
+         <h2>User info</h2>
+ 
+         <div class = "plofile-container">
+            <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+           <table class = "table"> 
+                <tr><th>name</th> <th><%= @user.name %></th></tr>
+                <tr><th>introduction</th><th><%= @user.introduction %></th></tr>
+           </table>
+           <%= link_to "edit", edit_user_path(current_user.id) %>
+         </div>
 
-<section class = "single-book">
-<%= form_for (@book) do |f| %>
-   <h2>Title</h2>
-   <%= f.text_field :title %>
-   <h2>Opinion</h2>
-   <%= f.text_area :body %> 
+        <section class = "single-book">
+            <h2>Books</h2>    
+        <%= form_for (@book) do |f| %>
+            <h3>Title</h3>
+            <%= f.text_field :title %>
+            <h3>Opinion</h3>
+            <%= f.text_area :body %> 
 
-   <%= f.submit '投稿' %>
-<% end %>
-</section>
+            <%= f.submit 'Create Book', class: "btn btn-primary btn-block"  %>   
+            <% end %>
+        </section>
+     </div>
+ 
+ 
+ <div class ="col-xs-9">
+ <h2>Books</h2>
+     <table class = "table">
+         <thead>
+         <tr>
+             <th>Title</th>
+             <th>Opinion</th>
+         </tr>
+          </thead>
+          <tbody>
+          <% @books.each do |book| %>
+             <tr>
+                 <td><%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%></td>
+                 <td><%= link_to book.title, book_path(book.id) %></td>
+                 <td><%= book.body %></td>
+             </tr>
+             <% end %>
+          </tbody>   
+     </table>
+ 
+ 
+  </div> 
+ </div>
 
-
-<% @books.each do |book| %>
-    <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
-    <%= book.title %>
-    <%= book.body %>
-<% end %>
-
-
-
-</section>

@@ -1,26 +1,59 @@
-<h1>User info</h1>
+<div class = "container">
+ <div class = "body-container">
+    <div class = "col-xs-3">
+        <h1>User info</h1>
 
-<div class = "plofile-container">
-    <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
-    <h3>name  <%= @user.name %></h3>
-    <h3>introduction  <%= @user.introduction %></h3>
+        <div class = "plofile-container">
+            <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+            <h3>name  <%= @user.name %></h3>
+            <h3>introduction  <%= @user.introduction %></h3>
+            <% if @user.id == current_user.id %>
+            <%= link_to "edit", edit_user_path(current_user.id) %>
+            <% end %>
+        </div>
+    
+        <section class = "single-book">
+        <%= form_for (@book) do |f| %>
+        <h2>Title</h2>
+        <%= f.text_field :title %>
+        <h2>Opinion</h2>
+        <%= f.text_area :body %> 
+
+        <%= f.submit 'Create Book' %>
+        <% end %>
+        </section>
+    </div>
+
+
+<div class ="col-xs-9">
+
+    <table class = "table">
+    <thead>
+        <h2>Book detail</h2>
+    </thead>        
+         <tbody>
+            <td>
+                <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+                <%= link_to @user.name, user_path(@user.id) %>
+            </td>   
+            <td>
+                <%= @bookcreate.title %>
+            </td>
+            <td>
+                <%= @bookcreate.body %>
+            </td>
+        <% if @bookcreate.user == current_user %> 
+           <td> 
+            <%= link_to "edit", edit_book_path(@bookcreate.id) %>
+            <%= link_to "Destroy", book_path(@bookcreate.id), method: :delete %>
+            <% end %>
+           </td>
+         </tbody>   
+    </table>
+
+
+ </div> 
 </div>
-
-<section class = "single-book">
-<%= form_for (@book) do |f| %>
-   <h2>Title</h2>
-   <%= f.text_field :title %>
-   <h2>Opinion</h2>
-   <%= f.text_area :body %> 
-
-   <%= f.submit '投稿' %>
-<% end %>
-</section>
-
-<p>Bookcreate detail</p>
-    <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
-    <%= @bookcreate.title %>
-    <%= @bookcreate.body %>
 
 
 

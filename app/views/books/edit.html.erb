@@ -1,0 +1,15 @@
+<div class = "container">
+    <div class = "editcontainer row-md-6 col-md-offset-3">
+    <h1>Editting Book</h1>
+
+    <%= form_for(@book) do |f| %>
+        <h4>Title</h4>
+         <%= f.text_field :title, class: "area" %>
+        <h4>Opinion</h4>
+         <%= f.text_area :body, class: "area" %>
+         <%= f.submit 'Update Book',class: "btn btn-primary btn-block" %>
+    <% end %>
+    <%= link_to "show", book_path(@book.id) %> | 
+    <%= link_to "back", books_path %>
+    </div>
+</div>
