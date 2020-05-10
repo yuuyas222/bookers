@@ -3,13 +3,18 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
-  mount_uploader :img, ImageUploader
 
   
   attachment :profile_image 
 
   has_many :books, dependent: :destroy
 
-  validates :introduction, presence: true, length: {maximum: 50}
+  # validates :introduction, presence: true, length: {maximum: 50},on: :update
+  # with_options on: :update do
+  #   validates :introduction, presence: true, length: {maximum: 50}
+  # end
+
+  validates :introduction, presence: false, length: {maximum: 50}
+
+  validates :name, presence: true, length: {in: 2..20}
 end
