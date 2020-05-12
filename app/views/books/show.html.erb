@@ -2,36 +2,7 @@
     <%= flash[:notice] %>
 <% end %>  
 
-<div class = "container">
- <div class = "row">
-    <div class = "col-xs-3">
-        <h1>User info</h1>
-
-        <div class = "plofile-container">
-            <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
-            <table class = "table"> 
-                <tr><th>name</th> <th><%= @user.name %></th></tr>
-                <tr><th>introduction</th><th><%= @user.introduction %></th></tr>
-           </table>
-           <% if @user.id == current_user.id %>
-            <%= link_to edit_user_path(current_user.id) do %>
-                <div class= " edit btn btn-outline-secondary btn-default btn-block" ><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></div>
-            <% end %>
-            <% end %>
-        </div>
-    
-        <section class = "single-book">
-        <h2>New book</h2>
-        <%= form_for (@book) do |f| %>
-        <h2>Title</h2>
-        <%= f.text_field :title %>
-        <h2>Opinion</h2>
-        <%= f.text_area :body %> 
-
-        <%= f.submit 'Create Book', class: "btn btn-primary btn-block"  %>
-        <% end %>
-        </section>
-    </div>
+<%= render "users/templet" %>
 
 
 <div class ="col-xs-9">
@@ -42,21 +13,27 @@
     </thead>        
          <tbody>
             <td>
-                <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
-                <%= link_to @user.name, user_path(@user.id) %>
+                <%= attachment_image_tag @user, :profile_image, size: "40x40", fallback: "no_image.jpg"%><br>
+                <%= link_to @user.name, user_path(@user.id), class: "link" %>
             </td>   
             <td>
-                <%= link_to @bookcreate.title, book_path(@bookcreate.id) %>
+                <%= link_to @bookcreate.title, book_path(@bookcreate.id), class: "link" %>
             </td>
             <td>
                 <%= @bookcreate.body %>
             </td>
         <% if @bookcreate.user == current_user %> 
            <td> 
-            <%= link_to "Edit", edit_book_path(@bookcreate.id) %>
-            <%= link_to "Destroy", book_path(@bookcreate.id), method: :delete %>
+            <%= link_to edit_book_path(@bookcreate.id) do %>
+                <button type="button" class="btn btn-success active">Edit</button>
             <% end %>
            </td>
+           <td> 
+            <%= link_to book_path(@bookcreate.id), method: :delete do %>
+                <button type="button" class="btn btn-danger active">Destroy</button>
+            <% end %>
+           </td>
+           <% end %>
          </tbody>   
     </table>
 

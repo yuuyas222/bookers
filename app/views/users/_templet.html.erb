@@ -1,18 +1,35 @@
-<h1>User info</h1>
+<div class = "container">
+ <div class = "row">
+    <div class = "col-xs-3">
+        <h2>User info</h2>
 
-<div class = "plofile-container">
-    <%= attachment_image_tag user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
-    <h3>name  <%= user.username %></h3>
-    <h3>introduction  <%= user.introduction %></h3>
-</div>
+        <div class = "plofile-container">
+            <%= attachment_image_tag @user, :profile_image, size: "100x100", fallback: "no_image.jpg", class: "img" %>
+            <table class = "table"> 
+                <tr><th>name</th> <th><%= @user.name %></th></tr>
+                <tr><th>introduction</th><th><%= @user.introduction %></th></tr>
+           </table>
 
-<section class = "single-book">
-<%= form_for (book) do |f| %>
-   <h2>Title</h2>
-   <%= f.text_field :title %>
-   <h2>Opinion</h2>
-   <%= f.text_area :body %> 
-
-   <%= f.submit '投稿' %>
-<% end %>
-</section>
+           <div class = "row">
+            <% if @user.id == current_user.id %>
+            <%= link_to edit_user_path(current_user.id) do %>
+                <div class= " edit btn btn-outline-secondary btn-default btn-block" ><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></div>
+            <% end %>
+            <% end %>
+           </div> 
+        </div>
+    
+        <section class = "single-book">
+        <h2>New book</h2>
+         <div class = "row">  
+            <%= form_for (@book) do |f| %>
+            <%= f.label :title %>
+            <%= f.text_field :title, class: "width" %>
+            <%= f.label :body, "Opinion" %>
+            <%= f.text_area :body, class: "width" %> 
+        
+            <%= f.submit 'Create Book', class: "btn btn-primary btn-block "  %>   
+            <% end %>
+         </div> 
+        </section>
+    </div>

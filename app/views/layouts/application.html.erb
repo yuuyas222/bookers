@@ -14,7 +14,7 @@
 
   <div class = "header">
   <nav class="navbar navbar-default navbar-static-top">
-	<div class="container-fluid">
+	<div class= "container">
 		<div class="navbar-header">
 			<span>
 				Bookers
@@ -24,10 +24,26 @@
 		<div class= "navbar-right" >
     <ul class="nav navbar-nav">
      <% if user_signed_in? %>
-      <li> <span class = "glyphicon glyphicon-home" aria-hidden="true"><%= link_to ' home', user_path(current_user.id) %></span></li>
-      <li><span class="glyphicon glyphicon-user" aria-hidden="true"><%= link_to ' users', users_path %></span></li>
-      <li><span class="glyphicon glyphicon-book" aria-hidden="true"><%= link_to ' books', books_path %></span></li>
-      <li><span class="glyphicon glyphicon-log-out" aria-hidden="true"><%= link_to " logout", destroy_user_session_path, method: :delete %></span></li>
+      <li>
+      <%= link_to user_path(current_user.id) do %>
+        <span class = "glyphicon glyphicon-home" aria-hidden="true"></span>   Home
+      <% end %>  
+      </li>
+      <li>
+      <%= link_to users_path do %>
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>   Users
+      <% end %>
+      </li>
+      <li>
+      <%= link_to books_path do %>
+      <span class="glyphicon glyphicon-book" aria-hidden="true"></span>  Books
+      <% end %>
+      </li>
+      <li>
+      <%= link_to destroy_user_session_path, method: :delete do %>
+      <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> logout
+      <% end %>
+      </li>
      <% else %>
       <li> <span class = "glyphicon glyphicon-home" aria-hidden="true"><a href = "/"> Home</a></span></li>
       <li> <span class = "glyphicon glyphicon-paperclip" aria-hidden="true"> <a href = "/home/about"> About</a></span></li>
