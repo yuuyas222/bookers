@@ -8,6 +8,8 @@ class User < ApplicationRecord
   attachment :profile_image 
 
   has_many :books, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :book_comments, dependent: :destroy
 
   # validates :introduction, presence: true, length: {maximum: 50},on: :update
   # with_options on: :update do
